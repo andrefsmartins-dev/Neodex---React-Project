@@ -1,7 +1,6 @@
 # NeoDex - The Interactive Pokédex, TCG Explorer & Team Builder
 
 ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
-![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
 ![Express](https://img.shields.io/badge/Node%20%26%20Express-339933?logo=node.js&logoColor=white)
 
 A full-featured Pokémon web application combining a dynamic Pokédex, Trading Card Game (TCG) explorer, competitive Team Builder with real-time stats analysis, and location-based Pokémon GO weather boosts.
