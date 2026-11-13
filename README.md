@@ -53,7 +53,7 @@ Both `my-app` and `server_pokeapi` include their own `package.json`, so `npm ins
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/andrefsmartins-dev/Neodex---React-Project.git
-cd neodex
+cd Neodex---React-Project
 ```
 
 ### 2. Configure Front-end environment variables
