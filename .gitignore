@@ -9,3 +9,6 @@ dist/
 **/dist/
 .vite/
 *.log
+
+
+!**/serviceAccountKey.example.json
