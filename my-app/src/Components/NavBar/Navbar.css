@@ -50,7 +50,7 @@
 /* PÁGINA INICIAL */
 .nav-item.pagina-inicial.active img,
 .nav-item.pagina-inicial:hover img {
-    content: url('Assets/Navbar/pagina_inicial_hover.png');
+    content: url('/Assets/Navbar/pagina_inicial_hover.png');
 }
 
 .nav-item.pagina-inicial.active span,
