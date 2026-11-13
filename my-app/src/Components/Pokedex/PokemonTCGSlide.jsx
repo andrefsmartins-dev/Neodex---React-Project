@@ -1,89 +1,58 @@
 import { useRef, useState, useContext } from "react";
 import Button from "../UI/Button/Button";
 import { PokemonContext } from "../Contextos/PokemonContext";
-import "./Pokedex.css"
+import "./Pokedex.css";
 
 export default function PokemonTCGSlide({ cartas, carregarCartas, setLingua, lingua }) {
     const { toggleCartaFavorita, cartasFavoritas } = useContext(PokemonContext);
 
-    //controlo do carrossel de cartas
     const carrosselRef = useRef(null);
     const [indice, setIndice] = useState(0);
 
-    //definição das línguas e bandeiras - manipular pedido à api
     const langs = [
-        {
-            code: "en",
-            flag: "https://flagsapi.com/US/flat/64.png",
-            label: "English"
-        },
-        {
-            code: "ja",
-            flag: "https://flagsapi.com/JP/flat/64.png",
-            label: "Japanese"
-        },
-        {
-            code: "pt",
-            flag: "https://flagsapi.com/PT/flat/64.png",
-            label: "Portuguese"
-        },
-        {
-            code: "zh-tw",
-            flag: "https://flagsapi.com/CN/flat/64.png",
-            label: "Chinese"
-        }
+        { code: "en", flag: "https://flagsapi.com/US/flat/64.png", label: "English" },
+        { code: "ja", flag: "https://flagsapi.com/JP/flat/64.png", label: "Japanese" },
+        { code: "pt", flag: "https://flagsapi.com/PT/flat/64.png", label: "Portuguese" },
+        { code: "zh-tw", flag: "https://flagsapi.com/CN/flat/64.png", label: "Chinese" }
     ];
 
+    const selectedIndex = Math.max(0, langs.findIndex(l => l.code === lingua));
 
-    //índice da língua selecionada - manipular o slide das bandeiras
-    const selectedIndex = langs.findIndex(l => l.code === lingua);
-
-    //controla movimento carrossel
     const slide = (direcao) => {
         if (!carrosselRef.current || cartas.length === 0) return;
 
         const totalSlides = cartas.length;
-        const passos = 3; //cartas movidas por clique
+        const passos = window.innerWidth <= 600 ? 1 : 3;
         let novoIndice = indice + direcao * passos;
 
-        //ajusta o índice 
         if (novoIndice < 0)
             novoIndice = totalSlides + (novoIndice % totalSlides);
 
         if (novoIndice >= totalSlides)
             novoIndice = novoIndice % totalSlides;
 
-        //atualiza estado
         setIndice(novoIndice);
 
-        const container = carrosselRef.current; //utiliza o Ref para manipular diretamente o DOM do carrossel
-        if (!container.firstChild) return; //verifica se tem pelo menos UMA carta
+        const container = carrosselRef.current;
+        if (!container.firstChild) return;
 
-        //define o quanto o carrossel anda em cada movimento
         const slideWidth = container.firstChild.offsetWidth + 16;
-
-        //controla como o slider anda
         container.scrollTo({ left: novoIndice * slideWidth, behavior: "smooth" });
     };
 
     const cartasComEstrela = cartas.map(carta => {
-        let estrela = null;
-
-        //verifica se a carta está nas favoritas
         const isFavorito = cartasFavoritas.some(
             fav => fav.id === carta.id && fav.lingua === carta.lingua
         );
 
-        //define a imagem da estrela de favorito
-        let imagem = "/Assets/Favoritos/estrela.png";
-        if (isFavorito) {
-            imagem = "/Assets/Favoritos/estrela_hover.png";
-        }
+        const imagem = isFavorito
+            ? "/Assets/Favoritos/estrela_hover.png"
+            : "/Assets/Favoritos/estrela.png";
 
-        //elemento do like manipulavel 
-        estrela = (
+        const estrela = (
             <img
                 src={imagem}
+                alt="Favorite card"
                 onClick={(e) => {
                     e.stopPropagation();
                     toggleCartaFavorita(carta);
@@ -92,7 +61,7 @@ export default function PokemonTCGSlide({ cartas, carregarCartas, setLingua, lin
             />
         );
 
-        return { ...carta, estrela }; //retorna cartas com estrela
+        return { ...carta, estrela };
     });
 
     return (
@@ -102,12 +71,10 @@ export default function PokemonTCGSlide({ cartas, carregarCartas, setLingua, lin
             {!carregarCartas && (
                 <div className="carrossel-div">
                     <div className="flow">
-                        {/* Botão voltar slides */}
                         <Button onClick={() => slide(-1)} className="btn-simples-2">
                             &laquo;
                         </Button>
 
-                        {/* Slider de línguas */}
                         <div className="slider-bg-details">
                             <div
                                 className="slider-indicator"
@@ -119,18 +86,16 @@ export default function PokemonTCGSlide({ cartas, carregarCartas, setLingua, lin
                                     className="flag-btn"
                                     onClick={() => setLingua(l.code)}
                                 >
-                                    <img src={l.flag} title={l.label} />
+                                    <img src={l.flag} alt={l.label} title={l.label} />
                                 </Button>
                             ))}
                         </div>
 
-                        {/* Botão avançar slides */}
                         <Button onClick={() => slide(1)} className="btn-simples-2">
                             &raquo;
                         </Button>
                     </div>
 
-                    {/* Conteúdo principal do carrossel */}
                     {cartas.length === 0 && (
                         <p className="sem-pokemon">No Cards were found</p>
                     )}
@@ -144,6 +109,7 @@ export default function PokemonTCGSlide({ cartas, carregarCartas, setLingua, lin
                                 >
                                     <img
                                         src={`${carta.image}/high.png`}
+                                        alt={carta.name}
                                         title={carta.name}
                                         className="carta-pokemon"
                                     />

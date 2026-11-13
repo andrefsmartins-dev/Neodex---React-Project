@@ -3,77 +3,124 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    margin: 0 auto;
+    gap: 2rem;
+    margin: 0.5rem auto 1.5rem auto;
+    width: calc(100% - 2rem);
     max-width: 1200px;
-    padding: 2rem 1rem 0rem 1rem;
+    padding: 1.5rem 0 0 0;
+    box-sizing: border-box;
+}
+
+.pokemon-boost-list {
+    width: calc(100% - 2rem);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 0 1.5rem 0;
+    color: #333;
+    box-sizing: border-box;
 }
 
 .pokemon-go-info {
     flex: 1;
-    max-width: 650px;
+    max-width: 600px;
+    min-width: 0;
 }
 
 .pokemon-go-info h1 {
     margin-bottom: 1rem;
+    font-size: clamp(1.4rem, 3vw, 2rem);
 }
 
 .pokemon-go-info p {
     margin-bottom: 1.5rem;
     line-height: 1.6;
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .pokemon-go-output {
     flex: 1;
     background-color: rgba(255, 255, 255, 0.1);
-    padding: 1.5rem;
+    padding: 1.25rem;
     border-radius: 10px;
     text-align: right;
-    justify-content: right;
-    align-items: right;
     max-width: 470px;
+    min-width: 0;
     white-space: pre-wrap;
     font-family: monospace;
+    box-sizing: border-box;
+    font-size: 0.9rem;
 }
 
 .pokemon-go-output p {
     margin: 0.5rem 0;
 }
 
-.pokemon-boost-list {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.25rem 1.25rem;
-    color: #333;
-}
-
 .pokemon-boost-list h2 {
-    margin: 2rem 0 2rem 0;
+    margin: 2rem 0 1rem 0;
     color: #fff;
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+}
+
+.flow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    margin-bottom: 1rem;
 }
 
 .carousel-container {
     display: flex;
     align-items: center;
-    margin-top: 1rem;
+    width: 100%;
 }
 
 .carousel-track {
-    display: flex;
-    overflow: hidden;
-    width: 1200px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 1.25rem;
+    width: 100%;
+    overflow: hidden;
 }
 
-.flow {
-    display: flex;
-    justify-content: space-between; /* coloca os botões nas extremidades */
-    align-items: center;
-    width: 100%;
-    position: relative;
+/* TABLET */
+@media (max-width: 900px) {
+    .pokemon-go-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pokemon-go-info,
+    .pokemon-go-output {
+        max-width: 100%;
+        text-align: left;
+    }
+
+    .carousel-track {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(3, auto);
+        gap: 0.75rem;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .pokemon-go-output {
+        font-size: 0.8rem;
+        padding: 1rem;
+    }
+
+    .carousel-track {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(3, auto);
+        gap: 0.65rem;
+    }
+
+    /* Opcional: ajusta levemente o padding do card em mobile para ficar mais compacto */
+    .pokemon-boost-list .pokemon-card {
+        padding: 0.5rem;
+    }
 }
