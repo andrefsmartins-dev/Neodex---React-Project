@@ -10,7 +10,7 @@ export default function PokemonDetails({ pokemon, onBack, onSelect }) {
         fecharDetalhes, cap
     } = useContext(PokemonContext);
 
-    //estados para as cartas 
+    // estados para as cartas
     const [cartas, setCartas] = useState([]);
     const [carregarCartas, setCarregarCartas] = useState(false);
     const [lingua, setLingua] = useState("en");
@@ -27,77 +27,68 @@ export default function PokemonDetails({ pokemon, onBack, onSelect }) {
 
                 let cartasArray = [];
 
-                //verifica se o endpoint retorna "cards" e se é um array
+                // verifica se o endpoint retorna "cards" e se é um array
                 if (respostaCartas.cards && Array.isArray(respostaCartas.cards)) {
                     cartasArray = respostaCartas.cards;
                 }
 
-                //filtra cartas que possuem imagem
+                // filtra cartas que possuem imagem
                 const cards = cartasArray.filter(carta => carta.image);
 
-                //aualiza estado com cartas válidas
+                // atualiza estado com cartas válidas
                 setCartas(cards);
-
             } catch (err) {
                 console.error("Erro", err);
                 setCartas([]);
-
             } finally {
-                setCarregarCartas(false); // termina o carregamento
+                setCarregarCartas(false);
             }
         };
 
         fetchCartas();
-    }, [pokemon, lingua]); //atualiza sempre que o pokemon ou a lingua escolhida mudar
+    }, [pokemon, lingua]);
 
-    //define a imagem da estrela de favorito
-    let estrelaSrc = "Assets/Favoritos/estrela.png";
+    // define a imagem da estrela de favorito
+    let estrelaSrc = "/Assets/Favoritos/estrela.png";
     if (favoritos.includes(pokemon.nome)) {
-        estrelaSrc = "Assets/Favoritos/estrela_hover.png";
+        estrelaSrc = "/Assets/Favoritos/estrela_hover.png";
     }
 
-    //eventos de teclado - navegação
+    // eventos de teclado - navegação
     useEffect(() => {
         const handleKey = e => {
-            //proximo pokemon
-            if (e.key === "ArrowRight")
-                handleNextPokemon(pokemon);
-
-            //pokemon anterior
-            if (e.key === "ArrowLeft")
-                handlePrevPokemon(pokemon);
-
-            //fecha os detalhes 
-            if (e.key === "Escape")
-                fecharDetalhes();
+            if (e.key === "ArrowRight") handleNextPokemon(pokemon);
+            if (e.key === "ArrowLeft") handlePrevPokemon(pokemon);
+            if (e.key === "Escape") fecharDetalhes();
         };
 
         window.addEventListener("keydown", handleKey);
-        return () => window.removeEventListener("keydown", handleKey); //remove listener ao desmontar
+        return () => window.removeEventListener("keydown", handleKey);
     }, [pokemon]);
 
     return (
         <div className="pokemon-detalhes">
             {/* botão de voltar */}
             <div className="botao-container">
-                <Button className="btn-simples-1" onClick={onBack}> Back </Button>
+                <Button className="btn-simples-1" onClick={onBack}>Back</Button>
             </div>
 
             {/* navegação entre Pokémon */}
             <div className="flow-container">
-                <p onClick={() => handlePrevPokemon(pokemon)}> Previous </p>
-                <p onClick={() => handleNextPokemon(pokemon)}> Next </p>
+                <p onClick={() => handlePrevPokemon(pokemon)}>Previous</p>
+                <p onClick={() => handleNextPokemon(pokemon)}>Next</p>
             </div>
 
             {/* informações do Pokémon */}
             <div className="detalhes-grid">
                 <div className="infos">
-                    <p className="id"> #{pokemon.id}</p>
+                    <p className="id">#{pokemon.id}</p>
 
                     <div className="nome-favorito-container">
                         <h2>{cap(pokemon.nome)}</h2>
                         <img
                             src={estrelaSrc}
+                            alt="Favorite"
                             onClick={() => toggleFavorito(pokemon.nome)}
                         />
                     </div>
@@ -123,10 +114,15 @@ export default function PokemonDetails({ pokemon, onBack, onSelect }) {
 
                 {/* sprite do Pokémon */}
                 <div className="sprite-central">
-                    <img className="main-sprite" src={pokemon.sprite} title={cap(pokemon.nome)} />
+                    <img
+                        className="main-sprite"
+                        src={pokemon.sprite}
+                        alt={cap(pokemon.nome)}
+                        title={cap(pokemon.nome)}
+                    />
                 </div>
 
-                {/*evoluções e tipos */}
+                {/* evoluções e tipos */}
                 <div className="evolucoes">
                     <h3>Evolutions</h3>
                     <ul>
@@ -151,7 +147,11 @@ export default function PokemonDetails({ pokemon, onBack, onSelect }) {
                         <ul>
                             {pokemon.tipos.map((t, i) => (
                                 <li key={i} className="tipo-item">
-                                    <img src={`/Assets/Icones/${t}.png`} title={cap(t)} />
+                                    <img
+                                        src={`/Assets/Icones/${t}.png`}
+                                        alt={cap(t)}
+                                        title={cap(t)}
+                                    />
                                     <span className="tipo-nome">{cap(t)}</span>
                                 </li>
                             ))}
@@ -161,11 +161,12 @@ export default function PokemonDetails({ pokemon, onBack, onSelect }) {
             </div>
 
             {/* componente que mostra as cartas */}
-            {<PokemonTCGSlide
+            <PokemonTCGSlide
                 cartas={cartas}
                 carregarCartas={carregarCartas}
                 lingua={lingua}
-                setLingua={setLingua} />}
+                setLingua={setLingua}
+            />
         </div>
     );
 }
