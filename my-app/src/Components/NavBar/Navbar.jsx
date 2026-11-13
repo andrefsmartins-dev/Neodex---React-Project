@@ -51,7 +51,7 @@ export default function Navbar () {
 
             <div className="nav-links">
                 <NavLink to="/" className={({ isActive }) => classeNome(isActive, "pagina-inicial")}>
-                    <img src="Assets/Navbar/pagina_inicial.png" alt="Página Inicial" />
+                    <img src="/Assets/Navbar/pagina_inicial.png" alt="Página Inicial" />
                     <span> Home </span>
                 </NavLink>
 
