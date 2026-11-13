@@ -28,6 +28,7 @@ A full-featured Pokémon web application combining a dynamic Pokédex, Trading C
 
 ---
 
+
 ### System Architecture Diagram
 
 <p align="left">
@@ -43,6 +44,13 @@ A full-featured Pokémon web application combining a dynamic Pokédex, Trading C
       <li><strong>Shared UI Primitives</strong> - Reusable <code>Button</code>, <code>Input</code>, and <code>Select</code> components ensure consistent styling across all routes.</li>
     </ul>
 </p>
+
+---
+
+## Security & Firebase Configuration
+
+- **Firestore Security Rules (`firestore.rules`)** - The repository includes production security rules that grant public read-only access to the `pokemons` catalog while restricting reads and writes on `/users/{userId}` documents strictly to the authenticated owner (`request.auth.uid == userId`). Apply these rules under **Firebase Console → Firestore Database → Rules**.
+- **Authorized Domains** - When deploying to production, add your custom domain (e.g., `neodex.andrefsmartins.com`) under **Firebase Console → Authentication → Settings → Authorized domains** so OAuth sign-in popups work properly.
 
 ---
 
