@@ -67,7 +67,7 @@
 /* POKEDEX */
 .nav-item.pokedex.active img,
 .nav-item.pokedex:hover img {
-    content: url('/my-app/public/Assets/Navbar/pokedex_hover.png');
+    content: url('/Assets/Navbar/pokedex_hover.png');
 }
 
 .nav-item.pokedex.active span,
@@ -78,7 +78,7 @@
 /* EQUIPA */
 .nav-item.equipa.active img,
 .nav-item.equipa:hover img {
-    content: url('/my-app/public/Assets/Navbar/equipa_hover.png');
+    content: url('/Assets/Navbar/equipa_hover.png');
 }
 
 .nav-item.equipa.active span,
@@ -89,7 +89,7 @@
 /* FAVORITOS */
 .nav-item.favoritos.active img,
 .nav-item.favoritos:hover img {
-    content: url('/my-app/public/Assets/Navbar/favoritos_hover.png');
+    content: url('/Assets/Navbar/favoritos_hover.png');
 }
 
 .nav-item.favoritos.active span,
@@ -100,7 +100,7 @@
 /* GO */
 .nav-item.go.active img,
 .nav-item.go:hover img {
-    content: url('/my-app/public/Assets/Navbar/go_hover.png');
+    content: url('/Assets/Navbar/go_hover.png');
 }
 
 .nav-item.go.active span,
@@ -111,7 +111,7 @@
 /* TCG */
 .nav-item.tcg.active img,
 .nav-item.tcg:hover img {
-    content: url('/my-app/public/Assets/Navbar/tcg_hover.png');
+    content: url('/Assets/Navbar/tcg_hover.png');
 }
 
 .nav-item.tcg.active span,
