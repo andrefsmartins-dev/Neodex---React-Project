@@ -4,14 +4,14 @@
 ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
 ![Express](https://img.shields.io/badge/Node%20%26%20Express-339933?logo=node.js&logoColor=white)
 
-A full-featured Pokémon web application combining a dynamic Pokédex, Trading Card Game (TCG) explorer, competitive Team Builder with real-time stats analysis, and location-based Pokémon GO weather boosts.
+A full-featured Pokémon web application combining a dynamic Pokédex, Trading Card Game (TCG) explorer, competitive Team Builder and location-based Pokémon GO weather boosts.
 
 ---
 
 ## Key Features
 
 - **Interactive Pokédex** - Search and filter Pokémon by name, type and generation with detailed base stats, abilities, and evolution data.
-- **Team Builder & Randomizer** - Assemble a Pokémon team, inspect type coverage and weaknesses or generate random teams, and share your team with your friends and challenge them to a battle against your team.
+- **Team Builder & Randomizer** - Assemble a Pokémon team, inspect type coverage and weaknesses or generate random teams, and share your team with your friends to see who would win in a battle.
 - **TCG Card Explorer** - Browse and filter Pokémon Trading Card Game sets and cards directly linked to each Pokémon. Available in 4 diferent languages - English, Japanese, Portuguese and Chinese.
 - **Pokémon GO Weather Boosts** - Uses browser Geolocation to detect real-time local weather and highlight boosted Pokémon types in Pokemon Go.
 - **User Authentication & Cloud Persistence** - Google OAuth & Email/Password login via **Firebase Auth**, saving user favorites and custom teams in **Cloud Firestore**.
@@ -23,7 +23,7 @@ A full-featured Pokémon web application combining a dynamic Pokédex, Trading C
 - **Front-end (`my-app/`)** - React 19, React Router DOM, Vite 8, CSS3, and Firebase SDK (`firebase`).
 - **Database Seeding Script (`server_pokeapi/`)** - Node.js, Express, CORS, `node-fetch`, and Firebase Admin SDK (`firebase-admin`).
 - **State Management via Modular Contexts** - Separated global state into `AuthContext`, `PokemonContext`, and `EquipaContext` to prevent unnecessary re-renders across heavy grid views.
-- **API Caching Layer** - Built a local seeding script (`server_pokeapi`) to fetch and normalize data from PokeAPI into Firestore, avoiding client-side rate limits and reducing initial load times. In the future, I intend to automate this to run locally on a weekly schedule, seeding the data into my own custom database as i'm leraning PHP and SQL.
+- **API Caching Layer** - Built a local seeding script (`server_pokeapi`) to fetch and normalize data from PokeAPI into Firestore, avoiding client-side rate limits and reducing initial load times.
 - **Static Data Optimization** - Because the external weather-boost API always returns the exact same static mapping array, I migrated the lookup to a local JSON file (`src/data/weatherBoosts.json`). This prevents exceeding third-party API rate limits, eliminates redundant network calls, and avoids exposing API keys on the client side.
 
 ---
@@ -86,6 +86,7 @@ cd ../server_pokeapi
 npm install
 node server.js
 ```
+Open `http://localhost:5173` in your browser and wait for the terminal to end.
 *(Wait until the script finishes populating Firestore. Once the data is saved in your database, you do not need to keep this server running).*
 
 ### 4. Start the Front-end application
@@ -98,9 +99,17 @@ Open `http://localhost:5173` in your browser.
 
 ---
 
+## Roadmap - Next Steps
+
+- [ ] Automate weekly database synchronization and migrate cached data to a custom **PHP & SQL** backend.
+- [ ] Add type-coverage and team weakness calculator to the Team Builder.
+- [ ] Battle simulator against friends and AI.
+- [ ] Deploy live production build to `neodex.andrefsmartins.com`.
+
+---
+
 ## Contact
 
-- **Portfolio:** [andrefsmartins.com](https://andrefsmartins.com)
 - **Email:** [hello@andrefsmartins.com](mailto:hello@andrefsmartins.com)
 - **GitHub:** [@andrefsmartins-dev](https://github.com/andrefsmartins-dev)
 
