@@ -1,9 +1,10 @@
 .registo-container {
+    width: calc(100% - 2rem);
     max-width: 400px;
-    margin: 50px auto;
-    margin-top: 25px;
+    margin: 25px auto 50px auto;
     text-align: center;
     padding: 40px;
+    box-sizing: border-box;
 }
 
 .registo-name {
@@ -22,4 +23,13 @@
 
 .link-login:hover {
     text-decoration: underline;
+}
+
+/* RESPONSIVO */
+@media (max-width: 480px) {
+    .registo-container {
+        width: calc(100% - 1.5rem);
+        padding: 20px 15px;
+        margin-top: 15px;
+    }
 }

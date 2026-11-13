@@ -1,10 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import PokemonList from "../Pokedex/PokemonList";
-import Button from "../UI/Button/Button"
+import Button from "../UI/Button/Button";
 import TCGGrid from "../TCG/TCGGrid";
-import { PokemonContext } from "../Contextos/PokemonContext"
+import { PokemonContext } from "../Contextos/PokemonContext";
 import "./Favoritos.css";
-
 
 export default function Favoritos() {
     const {
@@ -14,8 +13,6 @@ export default function Favoritos() {
     } = useContext(PokemonContext);
 
     const [countdown, setCountdown] = useState(3);
-
-    //manipula o que é mostrado ao utilizador
     const [tabAtiva, setTabAtiva] = useState("pokemon");
 
     // redirecionar se não estiver logado
@@ -47,21 +44,16 @@ export default function Favoritos() {
         };
 
         window.addEventListener("keydown", handleKeyDown);
-
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown);
-        };
+        return () => window.removeEventListener("keydown", handleKeyDown);
     }, []);
 
-    //abrir Pokémon - carrega detalhes e abre
-    //location na Pokedex faz com que este redirecionamente funcione corretamente
+    // abrir Pokémon - carrega detalhes e abre
     const handleClickPokemon = async (nome) => {
         await carregarPokemon(nome);
         abrirDetalhes(nome);
         redirecionar("/pokedex");
     };
 
-    //array definido mesmo que não haja cartasFavoritas
     const cartasFavoritasCompletas = cartasFavoritas || [];
 
     if (!user) {
@@ -73,7 +65,6 @@ export default function Favoritos() {
         );
     }
 
-    // pokémon favoritos completos
     const pokemonsFavoritos = favoritos
         .map(name => pokemonList.find(p => p.name === name))
         .filter(Boolean);
@@ -83,14 +74,14 @@ export default function Favoritos() {
             {/* slider de seleção */}
             <div className="favoritos-slider">
                 <Button
-                    className={tabAtiva === "pokemon" && "ativa"}
+                    className={tabAtiva === "pokemon" ? "ativa" : ""}
                     onClick={() => setTabAtiva("pokemon")}
                 >
                     Pokémon
                 </Button>
 
                 <Button
-                    className={tabAtiva === "cartas" && "ativa"}
+                    className={tabAtiva === "cartas" ? "ativa" : ""}
                     onClick={() => setTabAtiva("cartas")}
                 >
                     TCG Cards
@@ -115,7 +106,7 @@ export default function Favoritos() {
                         </>
                     );
                 }
-                return <p className="sem-pokemon"> No favorite Pokémon yet. </p>;
+                return <p className="sem-pokemon">No favorite Pokémon yet.</p>;
             })()}
 
             {/* tab cartas */}

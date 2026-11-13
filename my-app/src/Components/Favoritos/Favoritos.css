@@ -1,24 +1,36 @@
 .favoritos-slider {
-    max-width: 50%;
+    width: 100%;
+    max-width: 440px;
     display: flex;
     position: relative;
-    margin: 2rem auto 1.5rem auto;
-    border-radius: 6px;
+    margin: 1.5rem auto 1.25rem;
+    border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.3);
     overflow: hidden;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .favoritos-slider button {
-    flex: 1;
-    padding: 1rem;
+    flex: 1 1 50%;
+    width: 50%;
+    min-width: 0;
+    padding: 0.9rem 0.5rem;
     border: none;
-    background: none;
+    border-radius: 0;
+    background: transparent;
     color: #222;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
     position: relative;
+    z-index: 1;
+    white-space: nowrap;
+}
+
+.favoritos-slider button:hover {
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .favoritos-slider button.ativa {
@@ -34,17 +46,48 @@
     background-color: #fff;
     border-radius: 2px;
     transition: transform 0.3s ease;
-    z-index: 0;
+    z-index: 2;
 }
 
 .favoritos-slider::after {
     content: "";
     position: absolute;
-    top: 10%;
-    bottom: 10%;
+    top: 15%;
+    bottom: 15%;
     left: 50%;
     width: 1px;
     background-color: rgba(255, 255, 255, 0.5);
     transform: translateX(-50%);
     z-index: 1;
+}
+
+h2.fav {
+    width: 100%;
+    max-width: 100%;
+    margin: 0.5rem 0 1.25rem;
+    color: #fff;
+    font-weight: 500;
+    font-size: clamp(1.15rem, 3vw, 1.5rem);
+    text-align: left;
+}
+
+p.fav,
+.sem-pokemon {
+    width: 100%;
+    max-width: 100%;
+    margin: 1.5rem 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    text-align: left;
+}
+
+@media (max-width: 600px) {
+    .favoritos-slider {
+        max-width: 100%;
+        margin: 1rem auto 1rem;
+    }
+
+    .favoritos-slider button {
+        padding: 0.75rem 0.4rem;
+    }
 }

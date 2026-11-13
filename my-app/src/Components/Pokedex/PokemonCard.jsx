@@ -22,24 +22,25 @@ export default function PokemonCard({ nome, onClick }) {
         if (onClick) onClick();
     };
 
-    //carrega a sprite do pokemon
+    // carrega a sprite do pokemon
     let spriteConteudo;
     if (dados && dados.sprite) {
         spriteConteudo = (
             <img
                 src={dados.sprite}
+                alt={cap(nome)}
                 className="sprite"
                 title={cap(nome)}
             />
         );
     } else {
-        spriteConteudo = <p> Loading image...</p>;
+        spriteConteudo = <p>Loading image...</p>;
     }
 
-    //define a imagem da estrela de favorito
-    let imagem = "Assets/Favoritos/estrela.png";
+    // define a imagem da estrela de favorito
+    let imagem = "/Assets/Favoritos/estrela.png";
     if (favoritos.includes(nome)) {
-        imagem = "Assets/Favoritos/estrela_hover.png";
+        imagem = "/Assets/Favoritos/estrela_hover.png";
     }
 
     return (
@@ -47,6 +48,7 @@ export default function PokemonCard({ nome, onClick }) {
             {/* estrela favoritos */}
             <img
                 src={imagem}
+                alt="Favorite"
                 className="favorito-estrela"
                 onClick={(e) => {
                     e.stopPropagation();
@@ -60,9 +62,11 @@ export default function PokemonCard({ nome, onClick }) {
                     <img
                         key={i}
                         src={`/Assets/Icones/${t}.png`}
-                        className="tipo-icone" 
-                        title={cap(t)}/>))
-                }
+                        alt={cap(t)}
+                        className="tipo-icone"
+                        title={cap(t)}
+                    />
+                ))}
             </div>
 
             {/* info pokemon */}

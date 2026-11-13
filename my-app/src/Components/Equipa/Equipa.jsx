@@ -64,7 +64,7 @@ export default function Equipa() {
                 />
 
                 <Button onClick={limparSlots} className="btn-simples-2">
-                    Limpar Slots
+                    Clear Slots
                 </Button>
             </div>
 
