@@ -21,7 +21,7 @@
     gap: clamp(1.5rem, 4vw, 3rem);
     margin: 0 auto;
     max-width: 1210px;
-    padding: 1rem clamp(0.75rem, 3vw, 2rem);
+    padding: 1rem clamp(0.75rem, 3vw, 0.3rem);
 }
 
 .col-text {
