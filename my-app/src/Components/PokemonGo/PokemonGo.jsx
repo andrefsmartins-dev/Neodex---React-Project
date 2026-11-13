@@ -31,7 +31,16 @@ export default function PokemonGO() {
     const { obterClima, obterTempo, obterBoosts } = ObterClima();
 
     //controlador de carrossel
-    const pokemonVisivel = 5;
+    // controlador de carrossel adaptativo (5 em desktop, 6 em tablet/mobile)
+    const [isMobileOrTablet, setIsMobileOrTablet] = useState(window.innerWidth <= 900);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobileOrTablet(window.innerWidth <= 900);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    const pokemonVisivel = isMobileOrTablet ? 6 : 5;
     const pokemonMostra = [];
 
     useEffect(() => {
@@ -52,22 +61,23 @@ export default function PokemonGO() {
     }, [user, redirecionar]);
 
     //obtém a localização, os climas e os tipos com boost
+    // obtém a localização, os climas e os tipos com boost
     const getTempoInfo = async () => {
-        //atualiza o estado do output
+        // atualiza o estado do output com um array
         setOutput(["Obtaining location, please wait..."]);
 
         try {
-            //obtem latitude e longitude
+            // obtem latitude e longitude
             const posicao = await obterPosicao();
             const { latitude, longitude } = posicao.coords;
 
-            //passa como parametros para esta função que manipula o pedido à API OpenMeteo
+            // passa como parametros para esta função que manipula o pedido à API OpenMeteo
             const dadosClima = await obterClima(latitude, longitude);
 
-            //converte weather code para clima do Pokémon GO
+            // converte weather code para clima do Pokémon GO
             const tempoPoke = obterTempo(dadosClima.current_weather.weathercode);
 
-            //obtém tipos de Pokémon com boost
+            // obtém tipos de Pokémon com boost
             const boostPokemon = await obterBoosts(tempoPoke) || [];
 
             const texto = [
@@ -76,14 +86,19 @@ export default function PokemonGO() {
                 `Types that have Boost right now: ${boostPokemon.join(", ")}`
             ];
 
-            //atualiza estado do output com os dados
+            // atualiza estado do output com os dados
             setOutput(texto);
 
-            //seta os pokemons com boost
+            // seta os pokemons com boost
             setTiposBoost(boostPokemon);
 
         } catch (err) {
-            setOutput('Erro', err);
+            // Garante que o output é SEMPRE um array para o .map funcionar sem crashar
+            setOutput([
+                "Error: Location access denied or unavailable.",
+                "Please enable location permissions in your browser."
+            ]);
+            setTiposBoost([]);
         }
     };
 

@@ -87,7 +87,6 @@
 
 /* TABLET */
 @media (max-width: 960px) {
-
     .col-image img,
     .col-image-left img {
         max-width: 20rem;
@@ -96,7 +95,6 @@
 
 /* MOBILE */
 @media (max-width: 820px) {
-
     .col-container,
     .segunda-div .col-container,
     .quarta-div .col-container {

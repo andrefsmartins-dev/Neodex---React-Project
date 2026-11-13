@@ -3,14 +3,11 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 
 export default function TCGFilters({ filtros, atualizarFiltro, lingua, mudarLingua }) {
-
-    // reset a filtros aplicados
     const limparFiltros = () => {
         atualizarFiltro("");
         mudarLingua("en");
-    }
+    };
 
-    // array de bandeiras, agora a chinesa está por último
     const langs = [
         {
             code: "en",
@@ -34,8 +31,7 @@ export default function TCGFilters({ filtros, atualizarFiltro, lingua, mudarLing
         }
     ];
 
-    // encontra o indice da lingua selecionada
-    const selectedIndex = langs.findIndex(l => l.code === lingua);
+    const selectedIndex = Math.max(0, langs.findIndex(l => l.code === lingua));
 
     return (
         <div className="filtros-tcg">
@@ -53,20 +49,18 @@ export default function TCGFilters({ filtros, atualizarFiltro, lingua, mudarLing
             </div>
 
             <div className="slider-bg">
-                {/* slider e indicador */}
                 <div
                     className="slider-indicator"
                     style={{ transform: `translateX(${selectedIndex * 100}%)` }}
                 />
 
-                {/* bandeiras */}
                 {langs.map(l => (
                     <Button
                         key={l.code}
                         className="flag-btn"
                         onClick={() => mudarLingua(l.code)}
                     >
-                        <img src={l.flag} title={l.label} />
+                        <img src={l.flag} alt={l.label} title={l.label} />
                     </Button>
                 ))}
             </div>

@@ -2,7 +2,7 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 clamp(0.5rem, 2vw, 1.25rem) 1.5rem;
+    padding: 0 clamp(0.5rem, 2vw, 0.3rem) 1.5rem;
     color: #333;
     font-family: 'Montserrat', Arial, sans-serif;
 }

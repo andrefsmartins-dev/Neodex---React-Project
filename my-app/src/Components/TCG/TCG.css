@@ -1,82 +1,93 @@
-.tcg-tracker {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.25rem 1.25rem;
-    font-family: 'Montserrat', Arial, sans-serif;
-}
-
-.tcg-pagination-controls.bottom {
-    margin-top: 25px;
-    text-align: center;
-}
-
-.tcg-pagination-controls button {
-    padding: 6px 12px;
-    border: none;
-    background: #333;
+.tcg-status {
     color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 1rem;
-}
-
-.tcg-pagination-controls button:disabled {
-    background: #888;
-    cursor: default;
-}
-
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 35px;
-}
-
-.card-item {
-    padding: 10px 0px 5px 0px;
     text-align: center;
-    transition: transform 0.2s ease;
+    margin: 1.5rem 0;
 }
 
-.card-item:hover {
-    transform: scale(1.05);
-}
+    /* TCG Tracker - Alinhamento exato com a Pokédex */
+    .tcg-tracker {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem 1.5rem 0.3rem;
+        /* Aplica o exato espaçamento lateral consistente */
+        font-family: 'Montserrat', Arial, sans-serif;
+        box-sizing: border-box;
+    }
 
-.card-item img {
-    width: 100%;
-    display: block;
-}
+    .tcg-container,
+    .tcg-filtros-container,
+    .tcg-content {
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+    }
 
-.card-meta {
-    margin-top: 8px;
-}
+    /* FILTROS DO TCG */
+    .filtros-tcg {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem;
+        margin: clamp(1.5rem, 3vw, 2.5rem) 0 1.25rem;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0;
+    }
 
-.card-meta strong {
-    display: block;
-    font-size: 16px;
-}
-
-.meta-row {
-    font-size: 14px;
-    color: #fff;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-.filtros-tcg {
+.filtros-tcg .filtros {
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    flex: 1 1 auto;
+    width: auto;
+    margin: 0;
+}
+
+.filtros-tcg .pesquisar {
+    flex: 0 1 280px;
+    width: auto;
+    min-width: 0;
+    margin: 0;
+}
+
+.filtros-tcg .limpar-filtros {
+    flex: 0 0 auto;
+    width: auto;
+    white-space: nowrap;
+    margin: 0;
 }
 
 .slider-bg {
     display: flex;
     position: relative;
     border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.6);
-    border: 0.1rem solid rgba(0, 0, 0, 0.2);
-    min-width: 120px;
+    background-color: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    min-width: 180px;
+    flex-shrink: 0;
+    overflow: hidden;
     z-index: 0;
+}
+
+.flag-btn {
+    flex: 1 1 25%;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    border: none;
+    padding: 0.45rem 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flag-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .flag-btn img {
@@ -91,30 +102,149 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(100% /4);
+    width: 25%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.85);
     border-radius: 6px;
     transition: transform 0.3s ease;
     z-index: 0;
 }
 
+/* GRELHA DE CARTAS (DESKTOP: ~5 COLUNAS | TABLET: 3-4 | MOBILE: 2) */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
+    width: 100%;
+}
+
+.card-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 0;
+    text-align: center;
+    transition: transform 0.2s ease;
+    min-width: 0;
+}
+
+.card-item:hover {
+    transform: scale(1.04);
+}
+
+.card-item .card-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0.6rem;
+}
+
+.card-meta {
+    width: 100%;
+    margin-top: 8px;
+}
+
 .nome-e-estrela {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    margin-bottom: 5px;
+    justify-content: center;
+    gap: 6px;
+    max-width: 100%;
+    margin-bottom: 4px;
 }
 
 .nome-e-estrela .nome-carta {
     display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 14px;
-    color: white;
+    max-width: 100%;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #fff;
 }
 
+.estrela-tcgslider,
 .favorito-carta {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
     cursor: pointer;
+    object-fit: contain;
+}
+
+.meta-row {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.78rem;
+    margin: 2px 0 0;
+}
+
+/* TABLET: 4 CARTAS POR LINHA */
+@media (max-width: 900px) {
+    .filtros-tcg {
+        flex-wrap: wrap;
+    }
+
+    .filtros-tcg .filtros {
+        width: 100%;
+    }
+
+    .filtros-tcg .pesquisar {
+        flex: 1 1 auto;
+    }
+
+    .slider-bg {
+        width: 100%;
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.9rem;
+    }
+}
+
+/* MOBILE: 3 CARTAS POR LINHA */
+@media (max-width: 600px) {
+    .filtros-tcg .filtros {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filtros-tcg .pesquisar,
+    .filtros-tcg .limpar-filtros {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.65rem;
+    }
+
+    .card-item {
+        padding: 0.25rem 0;
+    }
+
+    .card-item:hover {
+        transform: none;
+    }
+
+    .nome-e-estrela {
+        gap: 4px;
+    }
+
+    .nome-e-estrela .nome-carta {
+        font-size: 0.72rem;
+    }
+
+    .estrela-tcgslider,
+    .favorito-carta {
+        width: 14px;
+        height: 14px;
+    }
+
+    .meta-row {
+        font-size: 0.64rem;
+    }
 }
