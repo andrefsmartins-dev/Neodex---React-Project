@@ -4,6 +4,8 @@
 ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
 ![Express](https://img.shields.io/badge/Node%20%26%20Express-339933?logo=node.js&logoColor=white)
 
+**Live Demo:** [neodex.andrefsmartins.com](https://neodex.andrefsmartins.com)
+
 A full-featured Pokémon web application combining a dynamic Pokédex, Trading Card Game (TCG) explorer, competitive Team Builder and location-based Pokémon GO weather boosts.
 
 ---
