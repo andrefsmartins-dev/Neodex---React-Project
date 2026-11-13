@@ -28,6 +28,29 @@ A full-featured Pokémon web application combining a dynamic Pokédex, Trading C
 
 ---
 
+### System Architecture Diagram
+
+<table>
+  <tr>
+    <td width="700" valign="top">
+      <img src="./docs/architecture-diagram.png" alt="NeoDex System Architecture" width="700" />
+    </td>
+    <td valign="top">
+      <strong>Core Architecture Breakdown</strong>
+      <ul>
+        <li><strong>Data &amp; Auth Layer (<code>server_pokeapi</code> &amp; <code>firebase.js</code>) </strong> - Local Express script seeds normalized PokéAPI data into Cloud Firestore, while Firebase handles Google OAuth, Email/Password auth and per-user documents.</li>
+        <li><strong>Context Providers</strong> - <code>AuthContext</code> manages session state and route access, feeding user data into <code>PokemonContext</code> (Pokédex &amp; TCG) and <code>EquipaContext</code> (Team Builder).</li>
+        <li><strong>Pokédex &amp; TCG Views</strong> - Modular filter and grid components (<code>PokemonList</code>, <code>TCGGrid</code>) dynamically fetch Pokémon details and multi-language TCG card slides.</li>
+        <li><strong>Pokémon GO Weather Boosts </strong> - <code>ObterLocalizacao</code> captures user coordinates and passes them to <code>ObterClima</code> (Open-Meteo API), cross-referencing local JSON rules to highlight boosted types.</li>
+        <li><strong>Team Builder (<code>Equipa</code>)</strong> - Manages 6-slot team composition, random team &amp; name generation (Datamuse API), Firestore saving, and native Web Share integration.</li>
+        <li><strong>Shared UI Primitives</strong> - Reusable <code>Button</code>, <code>Input</code>, and <code>Select</code> components ensure consistent styling across all routes.</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## Run Locally
 
 Both `my-app` and `server_pokeapi` include their own `package.json`, so `npm install` will automatically install all required dependencies. Follow these steps in order:
