@@ -30,22 +30,28 @@ A full-featured Pokémon web application combining a dynamic Pokédex, Trading C
 
 ---
 
-
 ### System Architecture Diagram
 
 <p align="left">
   <img src="./docs/architecture-diagram.png" alt="NeoDex System Architecture" width="700" />
-
-  <strong>Core Architecture Breakdown</strong>
-    <ul>
-      <li><strong>Data &amp; Auth Layer (<code>server_pokeapi</code> &amp; <code>firebase.js</code>) </strong> - Local Express script seeds normalized PokéAPI data into Cloud Firestore, while Firebase handles Google OAuth, Email/Password auth and per-user documents.</li>
-      <li><strong>Context Providers</strong> - <code>AuthContext</code> manages session state and route access, feeding user data into <code>PokemonContext</code> (Pokédex &amp; TCG) and <code>EquipaContext</code> (Team Builder).</li>
-      <li><strong>Pokédex &amp; TCG Views</strong> - Modular filter and grid components (<code>PokemonList</code>, <code>TCGGrid</code>) dynamically fetch Pokémon details and multi-language TCG card slides.</li>
-      <li><strong>Pokémon GO Weather Boosts </strong> - <code>ObterLocalizacao</code> captures user coordinates and passes them to <code>ObterClima</code> (Open-Meteo API), cross-referencing local JSON rules to highlight boosted types.</li>
-      <li><strong>Team Builder (<code>Equipa</code>)</strong> - Manages 6-slot team composition, random team &amp; name generation (Datamuse API), Firestore saving, and native Web Share integration.</li>
-      <li><strong>Shared UI Primitives</strong> - Reusable <code>Button</code>, <code>Input</code>, and <code>Select</code> components ensure consistent styling across all routes.</li>
-    </ul>
 </p>
+
+- **Data & auth layer** - `server_pokeapi` is a local Express script that reshapes PokéAPI data into one Firestore document per Pokémon (stats, moves, abilities, evolution chain). Firebase handles Google OAuth, email/password auth and per-user documents.
+- **Context providers** - `AuthContext` manages session state and route access and feeds the user into `PokemonContext` (Pokédex and TCG) and `EquipaContext` (Team Builder).
+- **Pokédex & TCG** - filter and grid components (`PokemonList`, `TCGGrid`) load Pokémon details and multi-language TCG cards (TCGdex).
+- **Pokémon GO weather boosts** - `ObterLocalizacao` gets the user's coordinates and `ObterClima` fetches the weather (Open-Meteo), then looks up the boosted types in a local JSON snapshot.
+- **Team Builder (`Equipa`)** - 6-slot teams, random team and name generation (Datamuse), saving to Firestore and sharing with the Web Share API.
+- **Shared UI** - reusable `Button`, `Input` and `Select` keep styling consistent across routes.
+
+---
+
+### Key decisions
+
+- **Seeded Firestore instead of calling PokéAPI from the client** - the app was exhausting PokéAPI's rate limits, so the data is fetched once and served from Firestore.
+- **Weather boosts as a local snapshot** - the Pokémon GO data comes from a paid API (downloaded on <date>), so keeping it in the repo avoids shipping an API key to the browser.
+- **Three focused contexts** (auth, Pokédex/TCG, team) to keep state out of the page components.
+
+> Glossary: *Equipa* = Team, *Favoritos* = Favorites, *Obter* = Get, *Lista* = List.
 
 ---
 
