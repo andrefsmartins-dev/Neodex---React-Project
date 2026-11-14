@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import PokemonList from "../Pokedex/PokemonList";
 import Button from "../UI/Button/Button";
 import TCGGrid from "../TCG/TCGGrid";
@@ -14,6 +14,10 @@ export default function Favoritos() {
 
     const [countdown, setCountdown] = useState(3);
     const [tabAtiva, setTabAtiva] = useState("pokemon");
+
+    // Referências para guardar a posição inicial e final do toque
+    const touchStartX = useRef(0);
+    const touchEndX = useRef(0);
 
     // redirecionar se não estiver logado
     useEffect(() => {
@@ -47,6 +51,28 @@ export default function Favoritos() {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, []);
 
+    // Gestão do Swipe no telemóvel
+    const handleTouchStart = (e) => {
+        touchStartX.current = e.targetTouches[0].clientX;
+    };
+
+    const handleTouchMove = (e) => {
+        touchEndX.current = e.targetTouches[0].clientX;
+    };
+
+    const handleTouchEnd = () => {
+        const distance = touchStartX.current - touchEndX.current;
+        const minSwipeDistance = 50; // Distância mínima em pixéis para considerar swipe
+
+        if (distance > minSwipeDistance) {
+            // Swipe para a esquerda -> muda para Cartas
+            setTabAtiva("cartas");
+        } else if (distance < -minSwipeDistance) {
+            // Swipe para a direita -> muda para Pokémon
+            setTabAtiva("pokemon");
+        }
+    };
+
     // abrir Pokémon - carrega detalhes e abre
     const handleClickPokemon = async (nome) => {
         await carregarPokemon(nome);
@@ -70,7 +96,12 @@ export default function Favoritos() {
         .filter(Boolean);
 
     return (
-        <div className="pokedex-pag">
+        <div
+            className="pokedex-pag"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+        >
             {/* slider de seleção */}
             <div className="favoritos-slider">
                 <Button
