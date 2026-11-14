@@ -584,4 +584,10 @@
     .equipa-guardada-slots {
         flex-wrap: wrap;
     }
+
+    .overlay {
+        width: 95%;
+        height: 88vh;
+        padding: 3.1rem 1rem 1rem;
+    }
 }
