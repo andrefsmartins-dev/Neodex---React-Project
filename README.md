@@ -121,7 +121,7 @@ Open `http://localhost:5173` in your browser.
 - [x] Make the website responsive for tablet and mobile.
 - [ ] Add type-coverage and team weakness calculator to the Team Builder.
 - [ ] Battle simulator against friends and AI.
-- [ ] Deploy live production build to `neodex.andrefsmartins.com`.
+- [x] Deploy live production build to `neodex.andrefsmartins.com`.
 
 ---
 
