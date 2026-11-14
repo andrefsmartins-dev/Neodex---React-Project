@@ -4,36 +4,35 @@
     margin: 1.5rem 0;
 }
 
-    /* TCG Tracker - Alinhamento exato com a Pokédex */
-    .tcg-tracker {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem 1.5rem 0.3rem;
-        /* Aplica o exato espaçamento lateral consistente */
-        font-family: 'Montserrat', Arial, sans-serif;
-        box-sizing: border-box;
-    }
+/* TCG Tracker - Alinhamento exato com a Pokédex */
+/* TCG Tracker - Alinhado perfeitamente com a Navbar */
+.tcg-tracker {
+    width: calc(100% - 2rem);
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Montserrat', Arial, sans-serif;
+    box-sizing: border-box;
+}
 
-    .tcg-container,
-    .tcg-filtros-container,
-    .tcg-content {
-        width: 100%;
-        margin: 0;
-        box-sizing: border-box;
-    }
+.tcg-container,
+.tcg-filtros-container,
+.tcg-content {
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
 
-    /* FILTROS DO TCG */
-    .filtros-tcg {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 1rem;
-        margin: clamp(1.5rem, 3vw, 2.5rem) 0 1.25rem;
-        width: 100%;
-        box-sizing: border-box;
-        padding: 0;
-    }
+/* FILTROS DO TCG */
+.filtros-tcg {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin: clamp(1.5rem, 3vw, 2.5rem) 0 1.25rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+}
 
 .filtros-tcg .filtros {
     display: flex;
