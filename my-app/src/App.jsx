@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './Components/NavBar/Navbar';
 import PaginaInicial from './Components/PaginaInicial/PaginaInicial';
 import Pokedex from './Components/Pokedex/Pokedex';
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/criar" element={<CriarConta />} />
             </Routes>
+            <Analytics />
         </div>
     );
 }
