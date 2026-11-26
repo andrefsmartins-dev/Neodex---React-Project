@@ -13,7 +13,7 @@ A full-featured Pokémon web application combining a dynamic Pokédex, Trading C
 ## Key Features
 
 - **Interactive Pokédex** - Search and filter Pokémon by name, type and generation with detailed base stats, abilities, and evolution data.
-- **Team Builder & Randomizer** - Assemble a Pokémon team, inspect type coverage and weaknesses or generate random teams, and share your team with your friends to see who would win in a battle.
+- **Team Builder & Randomizer** - Assemble a Pokémon team or generate random teams, and share your team with your friends.
 - **TCG Card Explorer** - Browse and filter Pokémon Trading Card Game sets and cards directly linked to each Pokémon. Available in 4 diferent languages - English, Japanese, Portuguese and Chinese.
 - **Pokémon GO Weather Boosts** - Uses browser Geolocation to detect real-time local weather and highlight boosted Pokémon types in Pokemon Go.
 - **User Authentication & Cloud Persistence** - Google OAuth & Email/Password login via **Firebase Auth**, saving user favorites and custom teams in **Cloud Firestore**.
