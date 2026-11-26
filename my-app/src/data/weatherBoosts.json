@@ -8,6 +8,11 @@
         "Dark",
         "Ghost"
     ],
+    "Cloudy": [
+        "Fairy",
+        "Fighting",
+        "Poison"
+    ],
     "Overcast": [
         "Fairy",
         "Fighting",
@@ -28,12 +33,7 @@
     ],
     "Windy": [
         "Dragon",
-        "Clear",
-        "Fog",
-        "Overcast",
-        "Partly Cloudy",
-        "Rainy",
-        "Snow",
-        "Windy"
+        "Flying",
+        "Psychic"
     ]
 }
